@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Observation Details" />
+
+    <!-- TextViews to display Observation Details -->
+    <TextView
+        android:id="@+id/textViewObservationContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="16dp"
+        android:text="Observation: " />
+
+    <TextView
+        android:id="@+id/textViewObservationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewObservationContent"
+        android:layout_marginTop="8dp"
+        android:text="Date: " />
+
+    <TextView
+        android:id="@+id/textViewObservationComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewObservationDate"
+        android:layout_marginTop="8dp"
+        android:text="Comments: " />
+
+    <!-- Button to Edit Observation -->
+
+    <!-- Button to Delete Observation -->
+
+    <!-- BottomNavigationView -->
+    <Button
+        android:id="@+id/buttonEditObservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewObservationComments"
+        android:layout_marginTop="22dp"
+        android:text="Edit Observation"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/buttonDeleteObservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonEditObservation"
+        android:layout_marginTop="42dp"
+        android:text="Delete Observation"
+        android:textSize="16sp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
+</RelativeLayout>

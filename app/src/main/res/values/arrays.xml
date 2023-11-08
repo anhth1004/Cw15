@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="difficulty_levels">
+        <item>Easy</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+</resources>

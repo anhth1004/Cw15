@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- TextView to display Observation -->
+    <TextView
+        android:id="@+id/textViewObservation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Observation"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- TextView to display Date of Observation -->
+    <TextView
+        android:id="@+id/textViewDateOfObservation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Date of Observation"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewObservation" />
+
+    <!-- TextView to display Comments -->
+    <TextView
+        android:id="@+id/textViewComments"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Comments"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewDateOfObservation" />
+
+    <!-- Button to view the observation -->
+
+    <!-- Button to edit the observation -->
+
+    <!-- Button to delete the observation -->
+
+    <!-- Button to view the observation -->
+
+    <!-- Button to edit the observation -->
+
+    <!-- Button to delete the observation -->
+
+    <Button
+        android:id="@+id/buttonEditObservation"
+        android:layout_width="70dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="8dp"
+        android:text="Edit"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewDateOfObservation" />
+
+    <Button
+        android:id="@+id/buttonDeleteObservation"
+        android:layout_width="70dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="8dp"
+        android:text="Delete"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toEndOf="@id/textViewComments"
+        app:layout_constraintTop_toTopOf="@id/textViewDateOfObservation" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

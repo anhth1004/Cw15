@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Edit Hike" />
+
+    <!-- EditText for Hike Name -->
+    <EditText
+        android:id="@+id/editTextHikeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:hint="Name of the hike" />
+
+    <!-- EditText for Location -->
+    <EditText
+        android:id="@+id/editTextLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextHikeName"
+        android:hint="Location" />
+
+    <!-- TextView to open DatePickerDialog -->
+    <TextView
+        android:id="@+id/textViewSelectDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextLocation"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:text="Click here to select date"
+        android:textColor="?attr/colorAccent" />
+
+    <!-- RadioGroup for Parking Available (Yes/No) -->
+    <RadioGroup
+        android:id="@+id/radio_group_parking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/textViewSelectDate"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:id="@+id/text_select_parking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parking Available:"
+            android:layout_marginEnd="16dp" />
+        <RadioButton
+            android:id="@+id/radio_parking_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes" />
+        <RadioButton
+            android:id="@+id/radio_parking_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No" />
+    </RadioGroup>
+
+    <!-- EditText for Length of the Hike -->
+    <EditText
+        android:id="@+id/editTextHikeLength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radio_group_parking"
+        android:layout_marginTop="16dp"
+        android:hint="Length of the hike" />
+
+    <!-- TextView for Difficulty Level -->
+    <TextView
+        android:id="@+id/textViewDifficultyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextHikeLength"
+        android:layout_marginTop="16dp"
+        android:text="Difficulty Level:"
+        android:textColor="?android:attr/textColorSecondary" />
+
+    <!-- EditText for Description -->
+
+    <!-- BottomNavigationView -->
+    <Spinner
+        android:id="@+id/spinnerDifficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDifficultyLabel"
+        android:layout_marginTop="23dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextHikeLength"
+        android:layout_marginTop="101dp"
+        android:hint="Description" />
+    <Button
+        android:id="@+id/buttonSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextDescription"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="Save Hike" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>
