@@ -26,6 +26,7 @@ public class AddObservationActivity extends AppCompatActivity {
     EditText comments_input;
     Button add_observation_button;
     TextView textViewSelectDateOfObservation;
+
     private Calendar selectedDate = Calendar.getInstance();
 
 
@@ -80,7 +81,6 @@ public class AddObservationActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private void showDatePicker() {

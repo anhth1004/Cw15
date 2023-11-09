@@ -88,10 +88,10 @@ public class AddActivity extends AppCompatActivity {
                 DB.addHike(hikeNameInput.getText().toString().trim(),
                         locationInput.getText().toString().trim(),
                         textViewSelectDate.getText().toString().trim(),
-                        rb.getText().toString().trim(),
-                        descriptionInput.getText().toString().trim(),
+                        rb.getText().toString().trim(),difficultyLevel,
                         Double.parseDouble(hikeLengthInput.getText().toString().trim()),
-                        difficultyLevel);
+                        descriptionInput.getText().toString().trim()
+                        );
                 // Cập nhật danh sách chuyến đi trên màn hình HomeActivity
 //                Intent updateIntent = new Intent();
 //                setResult(RESULT_OK, updateIntent);

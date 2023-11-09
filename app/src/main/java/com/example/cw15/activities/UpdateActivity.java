@@ -92,7 +92,13 @@ public class UpdateActivity extends AppCompatActivity {
             desc = description_input.getText().toString().trim();
 
             db.updateHike(id, name, location, date, parkingAvailable, length, difficultyLevel, desc);
+
+            // Set the result here to indicate that the update was successful
+            setResult(RESULT_OK);
+
+            finish();
         });
+
     }
 
     void getAndSetIntentData(){

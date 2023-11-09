@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,12 +39,14 @@ public class ViewHikeActivity extends AppCompatActivity {
             textViewHikeLength, textViewDifficulty, textViewDescription;
     private RecyclerView recyclerViewObservations;
     private Button buttonAddObservation;
+    int EDIT_OBSERVATION_REQUEST = 5;
     private MyDatabaseHelper databaseHelper;
     private List<String> observationList;
     private ObservationsAdapter observationsAdapter;
     private String hikeId, hikeName;
     ArrayList<String> observation_id, observation, date_of_observation, comment;
-    private static final int UPDATE_OBSERVATION_REQUEST = 1;
+    private static final int UPDATE_OBSERVATION_REQUEST = 4;
+    private static final int REQUEST_ADD_OBSERVATION = 1;
 
 
     private List<String> hike_id, name, location, date, parkingAvailable, desc;
@@ -63,6 +67,8 @@ public class ViewHikeActivity extends AppCompatActivity {
         textViewHikeLength = findViewById(R.id.textViewHikeLength);
         textViewDifficulty = findViewById(R.id.textViewDifficulty);
         textViewDescription = findViewById(R.id.textViewDescription);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         recyclerViewObservations = findViewById(R.id.recyclerViewObservations);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -183,8 +189,10 @@ public class ViewHikeActivity extends AppCompatActivity {
         buttonAddObservation.setOnClickListener(view -> {
             Intent observationIntent = new Intent(ViewHikeActivity.this, AddObservationActivity.class);
             observationIntent.putExtra("hike_id", hikeId);
-            startActivityForResult(observationIntent, 1);
+            startActivityForResult(observationIntent, REQUEST_ADD_OBSERVATION);
+
         });
+
 
     }
     // Xử lý chỉnh sửa quan sát
@@ -192,7 +200,7 @@ public class ViewHikeActivity extends AppCompatActivity {
         // Chuyển đến màn hình chỉnh sửa quan sát (UpdateObservationActivity)
         Intent editObservationIntent = new Intent(ViewHikeActivity.this, UpdateObservationActivity.class);
         editObservationIntent.putExtra("observation_id", observationId);
-        startActivityForResult(editObservationIntent, 3);
+        startActivityForResult(editObservationIntent, UPDATE_OBSERVATION_REQUEST);
     }
     public void deleteObservation(String observationId) {
         // Convert observationId to an integer (if it's a valid integer)
@@ -232,14 +240,14 @@ public class ViewHikeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_update, menu);
         return true;
     }
 
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.delete_all_button) {
+        if (item.getItemId() == R.id.delete_button) {
             deleteHike();
             return true;
         }
@@ -258,8 +266,8 @@ public class ViewHikeActivity extends AppCompatActivity {
                     String date = cursor.getString(3);
                     String parkingAvailable = cursor.getString(4);
                     String hikeLength = cursor.getString(6);
-                    String difficulty = cursor.getString(7);; // Replace with the actual difficulty level
-                    String description = cursor.getString(5);
+                    String difficulty = cursor.getString(5);; // Replace with the actual difficulty level
+                    String description = cursor.getString(7);
 
                     textViewHikeName.setText("Hike Name: " + name);
                     textViewLocation.setText("Location: " + location);
@@ -295,12 +303,24 @@ public class ViewHikeActivity extends AppCompatActivity {
         }
     }
     void deleteHike() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewHikeActivity.this);
         builder.setTitle("Delete " + hikeName + "?");
         builder.setMessage("Are you sure?");
 
         builder.setPositiveButton("Yes", (dialogInterface, i) -> {
             MyDatabaseHelper databaseHelper = new MyDatabaseHelper(ViewHikeActivity.this);
             databaseHelper.deleteOneRow(hikeId);
+
+            // Cập nhật dữ liệu
+            int position = observation_id.indexOf(hikeId);
+            observation_id.remove(position);
+            observation.remove(position);
+            date_of_observation.remove(position);
+            comment.remove(position);
+
+            // Thông báo cho RecyclerView rằng dữ liệu đã thay đổi
+            observationsAdapter.notifyDataSetChanged();
+
             finish();
         });
 
@@ -309,18 +329,22 @@ public class ViewHikeActivity extends AppCompatActivity {
 
         builder.create().show();
     }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                // Đã thêm quan sát thành công, cập nhật lại dữ liệu chuyến đi và danh sách quan sát
+
+        if (resultCode == RESULT_OK) {
+            loadHikeDetails(hikeId);
+            updateRecyclerViewData();
+            if (requestCode == REQUEST_ADD_OBSERVATION || requestCode == EDIT_OBSERVATION_REQUEST) {
+                // The update was successful, so refresh the data
                 loadHikeDetails(hikeId);
                 updateRecyclerViewData();
             }
         }
     }
-
     // Cập nhật danh sách quan sát
     public void updateRecyclerViewData() {
         observation_id.clear();
@@ -331,5 +355,6 @@ public class ViewHikeActivity extends AppCompatActivity {
         storeDataInArrays(hikeId);
         observationsAdapter.notifyDataSetChanged();
     }
+
 
 }

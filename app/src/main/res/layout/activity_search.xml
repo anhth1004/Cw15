@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".activities.SearchActivity">
 
     <EditText
         android:id="@+id/search_input"
@@ -12,7 +12,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Trip Name"
+        android:hint="Hike Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

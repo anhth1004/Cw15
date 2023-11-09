@@ -26,7 +26,7 @@ public class UpdateObservationActivity extends AppCompatActivity {
     Button saveObservationButton;
     TextView selectDateOfObservation;
     private Calendar selectedDate = Calendar.getInstance();
-    private static final int UPDATE_OBSERVATION_REQUEST = 1;
+    private static final int UPDATE_OBSERVATION_REQUEST = 3;
 
 
     @Override
@@ -55,6 +55,7 @@ public class UpdateObservationActivity extends AppCompatActivity {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
 
+        // In UpdateObservationActivity
         saveObservationButton.setOnClickListener(view -> {
             if (observationInput.getText().toString().isEmpty() ||
                     selectDateOfObservation.getText().toString().isEmpty() ||
@@ -70,10 +71,12 @@ public class UpdateObservationActivity extends AppCompatActivity {
                 resultIntent.putExtra("observationDataKey", observationInput.getText().toString());
                 resultIntent.putExtra("dateOfObservationKey", selectDateOfObservation.getText().toString());
                 resultIntent.putExtra("observationCommentKey", commentsInput.getText().toString());
-                setResult(RESULT_OK);
+                setResult(RESULT_OK, resultIntent);
+
                 finish();
             }
         });
+
     }
 
     private void showDatePicker() {

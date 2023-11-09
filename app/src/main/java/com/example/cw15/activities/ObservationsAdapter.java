@@ -1,5 +1,6 @@
 package com.example.cw15.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
     private final ArrayList<String> date_of_observation;
     private final ArrayList<String> comment;
     private final OnItemClickListener listener;
+    int EDIT_OBSERVATION_REQUEST = 5;
 
     public ObservationsAdapter(Context context, ArrayList<String> observation_id, ArrayList<String> observation, ArrayList<String> date_of_observation, ArrayList<String> comment, OnItemClickListener listener) {
         this.context = context;
@@ -59,27 +61,12 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
             comments_text = itemView.findViewById(R.id.textViewComments);
 
             // Xử lý sự kiện khi người dùng nhấn nút "Delete"
-            // Xử lý sự kiện khi người dùng nhấn nút "Edit"
-            // Xử lý sự kiện khi người dùng nhấn nút "Edit"
-            itemView.findViewById(R.id.buttonEditObservation).setOnClickListener(v -> {
+            itemView.findViewById(R.id.buttonDeleteObservation).setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    String observationId = observation_id.get(position);
-                    String observationData = observation.get(position);
-                    String dateOfObservation = date_of_observation.get(position);
-                    String observationComment = comment.get(position);
-
-                    Intent intent = new Intent(context, UpdateObservationActivity.class);
-                    intent.putExtra("observationId", observationId);
-                    intent.putExtra("observationData", observationData);
-                    intent.putExtra("dateOfObservation", dateOfObservation);
-                    intent.putExtra("observationComment", observationComment);
-                    context.startActivity(intent);
+                    listener.onDeleteClick(position);
                 }
             });
-
-
-
 
             // Xử lý sự kiện khi người dùng nhấn nút "Edit"
             itemView.findViewById(R.id.buttonEditObservation).setOnClickListener(v -> {
@@ -95,11 +82,10 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
                     intent.putExtra("observationDataKey", observationDataKey);
                     intent.putExtra("dateOfObservationKey", dateOfObservationKey);
                     intent.putExtra("observationCommentKey", observationCommentKey);
-                    context.startActivity(intent);
+
+                    ((Activity) context).startActivityForResult(intent, EDIT_OBSERVATION_REQUEST);
                 }
             });
-
-
         }
 
         public void bind(String observation, String date, String comment, int position) {
@@ -115,5 +101,4 @@ public class ObservationsAdapter extends RecyclerView.Adapter<ObservationsAdapte
         void onEditClick(int position);
         void onViewClick(int position);
     }
-
 }
